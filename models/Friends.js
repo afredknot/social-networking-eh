@@ -1,19 +1,22 @@
 const { Schema, Types, model } = require('mongoose');
 
-const reactionSchema = new Schema(
+const friendSchema = new Schema(
   {
-    reactionId: {
+    friendId: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
-    reactionBody: {
+    friendName: {
       type: String,
       required: true,
-      maxlength: 280,
+      maxlength: 50,
+      minlength: 4,
+      default: 'Unnamed assignment',
     },
-    username: {
-      type: String,
+    friends: {
+      type: Number,
       required: true,
+      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
     },
     createdAt: {
       type: Date,
@@ -27,7 +30,5 @@ const reactionSchema = new Schema(
     id: false,
   }
 );
-
-const Reaction = model('reaction', reactionSchema);
-
-module.exports = Reaction;
+const Friends = model('friend', friendSchema);
+module.exports = Friends;
