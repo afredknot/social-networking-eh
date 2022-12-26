@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const Response = require('./Reaction');
+const Reaction = require('./Reaction');
 
 // Schema to create Post model
 const thoughtSchema = new Schema(
@@ -23,7 +23,7 @@ const thoughtSchema = new Schema(
       minLength: 15,
       maxLength: 500,
     },
-    responses: [reactions],
+    responses: [reactionSchema],
   },
   {
     toJSON: {
@@ -32,6 +32,35 @@ const thoughtSchema = new Schema(
     id: false,
   }
 );
+
+
+const Reaction = mongoose.model(
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      maxlength: 280,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  }
+);
+
+Reaction.create(
+  {}
+)
+
+
 
 // Create a virtual property `responses` that gets the amount of response per video
 thoughtSchema
