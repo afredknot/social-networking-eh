@@ -1,19 +1,22 @@
-const { Schema, model } = require('mongoose');
-const Reaction = require('./Reaction');
+const { Schema, Types, model } = require('mongoose');
+// const mongoose =require('mongoose')
+const reactionSchema = require('./Reaction');
 
 // Schema to create Post model
 const thoughtSchema = new Schema(
   {
+    thoughtId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    
+    },
     thoughtText: {
       type: String,
       required: true,
       minLength: 1, 
       maxLength: 280,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
+    
     username: {
       type: String,
       required: true,
@@ -23,42 +26,52 @@ const thoughtSchema = new Schema(
       minLength: 15,
       maxLength: 500,
     },
-    responses: [reactionSchema],
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    // reaction: String,
+    // reactionId: Boolean,
+    reactions: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Reaction'
+    }],
   },
   {
     toJSON: {
       virtuals: true,
     },
-    id: false,
-  }
+  
+  },
+
 );
 
 
-const Reaction = mongoose.model(
-  {
-    reactionId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    reactionBody: {
-      type: String,
-      required: true,
-      maxlength: 280,
-    },
-    username: {
-      type: String,
-      required: true,
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-  }
-);
+// const Reaction = mongoose.model('Reaction', thoughtSchema);
+//   Reaction.create ([{
+//     reactionId: {
+//       type: Schema.Types.ObjectId,
+//       default: () => new Types.ObjectId(),
+//     },
+//     reactionBody: {
+//       type: String,
+//       required: true,
+//       maxlength: 280,
+//     },
+//     username: {
+//       type: String,
+//       required: true,
+//     },
+//     createdAt: {
+//       type: Date,
+//       default: Date.now,
+//     },
 
-Reaction.create(
-  {}
-)
+
+    
+    
+//   }
+// ]);
 
 
 

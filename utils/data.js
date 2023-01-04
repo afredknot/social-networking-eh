@@ -96,14 +96,14 @@ const getRandomThought = (int) => {
       published: Math.random() < 0.5,
       description: getRandomArrItem(descriptionsBodies),
       advertiserFriendly: Math.random() < 0.5,
-      responses: [...getThoughtReactions(3)],
+      responses: [...getReactions(3)],
     });
   }
   return results;
 };
 
 // Create the responses that will be added to each video
-const getThoughtReactions = (int) => {
+const getReactions = (int) => {
   if (int === 1) {
     return getRandomArrItem(possibleReactions);
   }

@@ -1,10 +1,13 @@
-const { Schema, Types, model } = require('mongoose');
-require('mongoose-type-email');
+const { Schema, model } = require('mongoose');
+var mongoose = require('mongoose');
+// require('mongoose-type-email');
+const thoughtSchema = require ('./Thought');
 const friendSchema = require ('./Friends');
 // Schema to create User model
-const userSchema = new Schema(
-  {
-      username: {
+
+const userSchema = new Schema({
+     
+    username: {
       type:  String, 
       unique: true,
       required: true,
@@ -14,32 +17,27 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique:true, 
-      required: "email adderess is required",
-      emails: [{ type: mongoose.SchemaTypes.Email }]
-     },
-     
+      required: "email address is required",
+      // email: mongoose.SchemaTypes.Email, 
       
-    thoughts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Thought',
-      },
+     },
+        
+    thoughts: [{
+     type: Schema.Types.ObjectId,
+     ref: 'thought'
     
-    ],
+    }    ],
 
-    friends: {
-      type: Schema.Types.ObjectId,
-      ref: 'Friends'
-    },
-    // [friendSchema],
+     friends: [friendSchema],
   
    
   
-  
+},
   
   
     // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
     // Here we are indicating that we want virtuals to be included with our response, overriding the default behavior
+    {
     toJSON: {
       virtuals: true,
     },
@@ -53,7 +51,7 @@ userSchema
   .virtual('friendCount')
   // Getter
   .get(function () {
-    return this.responses.length;
+    return this.friends.length;
   });
 // Initialize our User model
 const User = model('user', userSchema);
