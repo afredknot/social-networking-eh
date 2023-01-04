@@ -16,3 +16,7 @@ WHEN I test API POST, PUT, and DELETE routes in Insomnia
 THEN I am able to successfully create, update, and delete users and thoughts in my database
 WHEN I test API POST and DELETE routes in Insomnia
 THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+
+## What Ive learned
+
+how to create routes and use mongoose to sucessfully use crud operations with the mongoose setup.
