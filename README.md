@@ -20,3 +20,8 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 ## What Ive learned
 
 how to create routes and use mongoose to sucessfully use crud operations with the mongoose setup.
+
+## walkthrough link
+
+https://watch.screencastify.com/v/ZCTkE6oQcXJsBq6xfWlZ
+
